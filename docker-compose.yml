@@ -2,14 +2,14 @@ version: "3.8"
 
 services:
   frontend:
-    image: shrangit/fixitai-client:staging
+    image: BotnBolt-Admin/fixitai-client:staging
     container_name: uat-frontend
     ports:
       - "3000:80"
     restart: always
 
   backend:
-    image: shrangit/fixitai-server:staging
+    image: BotnBolt-Admin/fixitai-server:staging
     container_name: uat-backend
     ports:
       - "3001:3001"
