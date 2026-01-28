@@ -2,14 +2,14 @@ version: "3.8"
 
 services:
   frontend:
-    image: your-dockerhub-username/fixitai-client:latest
+    image: shrangit/fixitai-client:staging
     container_name: uat-frontend
     ports:
       - "3000:80"
     restart: always
 
   backend:
-    image: your-dockerhub-username/fixitai-server:latest
+    image: shrangit/fixitai-server:staging
     container_name: uat-backend
     ports:
       - "3001:3001"
