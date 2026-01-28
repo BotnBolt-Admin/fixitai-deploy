@@ -1,32 +1,32 @@
-version: "3.8"
+version: "3.9"
 
 services:
-  frontend:
-    image: BotnBolt-Admin/fixitai-client:staging
-    container_name: uat-frontend
+  client:
+    build:
+      context: https://shrangit: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@github.com/BotnBolt-Admin/fixitai-client.git#main
+    container_name: fixitai-client
     ports:
-      - "3000:80"
+      - "3000:3000"
     restart: always
 
-  backend:
-    image: BotnBolt-Admin/fixitai-server:staging
-    container_name: uat-backend
+  server:
+    build:
+      context: https://shrangit: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@github.com/BotnBolt-Admin/fixitai-server.git#main
+    container_name: fixitai-server
     ports:
-      - "3001:3001"
-    env_file:
-      - .env
+      - "8000:8000"
+    restart: always
     depends_on:
-      - mysql
-    restart: always
+      - db
 
-  mysql:
+  db:
     image: mysql:8
-    container_name: botnbolt-mysql
-    env_file:
-      - .env
-    volumes:
-      - mysql_data:/var/lib/mysql
+    container_name: fixitai-db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: fixitai
+      MYSQL_USER: fixitai
+      MYSQL_PASSWORD: fixitai123
+    ports:
+      - "3306:3306"
     restart: always
-
-volumes:
-  mysql_data:
