@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  frontend:
+    image: your-dockerhub-username/fixitai-client:latest
+    container_name: uat-frontend
+    ports:
+      - "3000:80"
+    restart: always
+
+  backend:
+    image: your-dockerhub-username/fixitai-server:latest
+    container_name: uat-backend
+    ports:
+      - "3001:3001"
+    env_file:
+      - .env
+    depends_on:
+      - mysql
+    restart: always
+
+  mysql:
+    image: mysql:8
+    container_name: botnbolt-mysql
+    env_file:
+      - .env
+    volumes:
+      - mysql_data:/var/lib/mysql
+    restart: always
+
+volumes:
+  mysql_data:
